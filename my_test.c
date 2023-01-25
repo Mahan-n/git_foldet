@@ -34,7 +34,7 @@ void ADDi(int x, int y, int z)
 void SUBI(int x, int y, int z)
 {
 
-    s[x] =  s[y]-z;
+    s[x] = s[y] - z;
 }
 void ANDI(int x, int y, int z)
 {
@@ -171,7 +171,6 @@ void overflow(int x, int y, int z)
     }
 }
 
-
 /****************************************************************************************************************************************************************************************/
 int main()
 {
@@ -186,7 +185,7 @@ int main()
     while (fscanf(fpointer, "%[^\n]\n", buffer) != EOF)
 
     {
-         for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 100; i++)
         {
             buffer[i] = toupper(buffer[i]);
         }
@@ -214,6 +213,10 @@ int main()
             else if (buffer[0] == 'E' && buffer[3] == 'T')
             {
                 buffer[4] = ' ';
+            }
+            if (buffer[0] == '/')
+            {
+                continue;
             }
 
             for (int i = 0; buffer[i] != ' '; i++)
@@ -326,7 +329,8 @@ int main()
             {
                 break;
             }
-            else{
+            else
+            {
                 printf("\nYou command is incorrect!\n");
             }
             for (i = 0; i < 100; i++)
@@ -339,7 +343,7 @@ int main()
             signflag(s[x]);
             overflow(s[x], s[y], s[z]);
         }
-     }
+    }
     // printf("hello world");
-    printf("\n%d %d %d %d %d %d %d %d %d %d %d %d", s[0], s[1], s[2], s[3], s[4], s[5],s[6], s[7] , s[8], s[9],s[10],s[11]);
+    printf("\n%d %d %d %d %d %d %d %d %d %d %d %d", s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8], s[9], s[10], s[11]);
 }
