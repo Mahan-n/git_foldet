@@ -1,0 +1,15 @@
+mov s0, 4
+mov s1, 5
+add s2, s1, s0
+sub s3, s2, s1
+and s4, s3, s0
+xor s5, s4, s1
+or s6, s5, s3
+addi s7, s5,  2
+subi s8, s7, 1
+andi s9, s2, 4
+xori s10, s9, 7
+ori s11, s10, s9
+swp s11, s10
+dump_regs
+exit
