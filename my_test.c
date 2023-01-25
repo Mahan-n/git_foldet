@@ -186,6 +186,10 @@ int main()
     while (fscanf(fpointer, "%[^\n]\n", buffer) != EOF)
 
     {
+         for (int i = 0; i < 100; i++)
+        {
+            buffer[i] = toupper(buffer[i]);
+        }
         shomaresh_khat++;
 
         if (shomaresh_khat >= count)
