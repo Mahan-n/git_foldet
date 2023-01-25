@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
 
 int s[32];
 int s_v[8];
@@ -170,21 +171,56 @@ void overflow(int x, int y, int z)
         s_v[5] = 0;
     }
 }
+void MULL(int x, int y)
+{
+    int z = s[x] * s[y];
+    int counter = 0;
+
+    int result = 0;
+    char k[32];
+    int u, v;
+    for (int v = 7; v >= 0 ; v--)
+    {
+        u = z % 2;
+        z = z / 2;
+        k[v] = u;
+    }
+    for (v = 0; v < 4; v++)
+    {
+    
+        if (k[v] == 1)
+        {
+            result = result + pow(2, v);
+        }
+    }
+    s[x] = result;
+    result = 0;
+    for (v = 4; v < 8; v++)
+    {
+
+        {
+            result = result + pow(2, v - 4);
+        }
+    }
+    s[y] = result;
+}
 
 /****************************************************************************************************************************************************************************************/
-int main()
+int main(int argc,char* argv[])
 {
+    char filename[25];
     char har_dastor[100];
     char buffer[100];
     char jmp[200][200], t;
-
+    strcpy(filename,argv[1]);
     int x, y, z, i;
     int shomaresh_khat = 0, count = 0;
-    FILE *fpointer = fopen("C:\\Users\\Asus\\Desktop\\in.txt", "r");
+    FILE *fpointer = fopen(filename, "r");
 
     while (fscanf(fpointer, "%[^\n]\n", buffer) != EOF)
 
     {
+       
         for (int i = 0; i < 100; i++)
         {
             buffer[i] = toupper(buffer[i]);
@@ -230,75 +266,174 @@ int main()
                 if (t == 'S')
                 {
                     sscanf(buffer, "MOV S%d, S%d", &x, &y);
-                    s[x] = s[y];
+
+                    if (x > 31 && y > 31)
+                    {
+                        printf("ERROR!");
+                    }
+                    else
+                    {
+
+                        s[x] = s[y];
+                    }
                 }
                 else
                 {
                     sscanf(buffer, "MOV S%d, %d", &x, &y);
-                    s[x] = y;
+
+                    if (x > 31)
+                    {
+                        printf("ERROR!");
+                    }
+                    else
+                    {
+
+                        s[x] = y;
+                    }
                 }
             }
             else if (strcmp(har_dastor, "ADD") == 0)
             {
                 sscanf(buffer, "ADD S%d, S%d, S%d", &x, &y, &z);
-                bitwiseadd(x, y, z);
+
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("ERROR!");
+                }
+                else
+                {
+
+                    bitwiseadd(x, y, z);
+                }
             }
 
             else if (strcmp(har_dastor, "SUB") == 0)
             {
-
                 sscanf(buffer, "SUB S%d, S%d, S%d", &x, &y, &z);
-                bitwisesub(x, y, z);
+
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+
+                    bitwisesub(x, y, z);
+                }
             }
 
             else if (strcmp(har_dastor, "AND") == 0)
             {
                 sscanf(buffer, "AND S%d, S%d, S%d", &x, &y, &z);
-                bitwiseand(x, y, z);
-                parityflag(s[x]);
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+                    bitwiseand(x, y, z);
+                    parityflag(s[x]);
+                }
             }
             else if (strcmp(har_dastor, "XOR") == 0)
             {
                 sscanf(buffer, "XOR S%d, S%d, S%d", &x, &y, &z);
-                bitwisexor(x, y, z);
-                parityflag(s[x]);
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+                    bitwisexor(x, y, z);
+                    parityflag(s[x]);
+                }
             }
             else if (strcmp(har_dastor, "OR") == 0)
             {
 
                 sscanf(buffer, "OR S%d, S%d, S%d", &x, &y, &z);
-                bitwiseor(x, y, z);
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+                    bitwiseor(x, y, z);
+                }
             }
             else if (strcmp(har_dastor, "ADDI") == 0)
             {
 
                 sscanf(buffer, "ADDI S%d, S%d, %d", &x, &y, &z);
-                ADDi(x, y, z);
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+                    ADDi(x, y, z);
+                }
             }
             else if (strcmp(har_dastor, "SUBI") == 0)
             {
                 sscanf(buffer, "SUBI S%d, S%d, %d", &x, &y, &z);
-                SUBI(x, y, z);
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+                    SUBI(x, y, z);
+                }
             }
             else if (strcmp(har_dastor, "ANDI") == 0)
             {
                 sscanf(buffer, "ANDI S%d, S%d, %d", &x, &y, &z);
-                ANDI(x, y, z);
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+                    ANDI(x, y, z);
+                }
             }
             else if (strcmp(har_dastor, "XORI") == 0)
             {
                 sscanf(buffer, "XORI S%d, S%d, %d", &x, &y, &z);
-                XORI(x, y, z);
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+
+                    XORI(x, y, z);
+                }
             }
             else if (strcmp(har_dastor, "ORI") == 0)
             {
                 sscanf(buffer, "ORI S%d, S%d, %d", &x, &y, &z);
-                ORI(x, y, z);
+                if (x > 31 && y > 31 && z > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+                    ORI(x, y, z);
+                }
             }
             else if (strcmp(har_dastor, "SWP") == 0)
             {
                 sscanf(buffer, "SWP S%d, S%d", &x, &y);
-                swp(x, y);
+                if (x > 31 && y > 31)
+                {
+                    printf("EROR!");
+                }
+                else
+                {
+                    swp(x, y);
+                }
             }
             else if (strcmp(har_dastor, "DUMP_REGS") == 0)
             {
@@ -329,9 +464,22 @@ int main()
             {
                 break;
             }
+            else if (strcmp(har_dastor, "MULL "))
+            {
+                sscanf(buffer, "MULL S%d, S%d", &x, &y);
+                if (x > 31 && y > 31)
+                {
+                    printf("ERROR!");
+                }
+                else
+                {
+
+                    MULL(x, y);
+                }
+            }
             else
             {
-                printf("\nYou command is incorrect!\n");
+                printf("\n%s Your command is incorrect!\n", har_dastor);
             }
             for (i = 0; i < 100; i++)
             {
@@ -344,6 +492,6 @@ int main()
             overflow(s[x], s[y], s[z]);
         }
     }
-    // printf("hello world");
-    printf("\n%d %d %d %d %d %d %d %d %d %d %d %d", s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7], s[8], s[9], s[10], s[11]);
+
+    printf("%d %d", s[1], s[0]);
 }
