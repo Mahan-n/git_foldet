@@ -174,35 +174,17 @@ void overflow(int x, int y, int z)
 void MULL(int x, int y)
 {
     int z = s[x] * s[y];
-    int counter = 0;
-
-    int result = 0;
+    int i = 0;
     char k[32];
-    int u, v;
-    for (int v = 7; v >= 0; v--)
+    int u = z;
+    while (u != 0)
     {
-        u = z % 2;
-        z = z / 2;
-        k[v] = u;
+        k[i] = z % 2;
+        u = u / 2;
+        i++;
     }
-    for (v = 0; v < 4; v++)
-    {
-
-        if (k[v] == 1)
-        {
-            result = result + pow(2, v);
-        }
-    }
-    s[x] = result;
-    result = 0;
-    for (v = 4; v < 8; v++)
-    {
-
-        {
-            result = result + pow(2, v - 4);
-        }
-    }
-    s[y] = result;
+    s[y] = z & 15;
+    s[x] = z >> (i - 4);
 }
 
 void DIV(int x, int y)
@@ -270,7 +252,7 @@ int main(int argc, char *argv[])
                 har_dastor[i] = buffer[i];
             }
 
-            // printf("%s", har_dastor);
+            printf("%s ", har_dastor);
 
             if (strcmp(har_dastor, "MOV") == 0)
             {
@@ -490,12 +472,9 @@ int main(int argc, char *argv[])
                     MULL(x, y);
                 }
             }
-            /************************************************************************************************************************************/
 
-            /************************************************************************************************************************************/
             else if (strcmp(har_dastor, "DIV") == 0)
             {
-                // printf("Hello world!");
                 sscanf(buffer, "DIV S%d, S%d", &x, &y);
                 if (x > 31 && y > 31)
                 {
@@ -506,9 +485,20 @@ int main(int argc, char *argv[])
                     DIV(x, y);
                 }
             }
+            else if (strcmp(har_dastor, "SKIE") == 0)
+            {
+                sscanf(buffer, "SKIE S%d S%d", &x, &y);
+                if (s[x] == s[y])
+                {
+                }
+                else
+                {
+                    continue;
+                }
+            }
             else
             {
-                printf("\n%s Your command is incorrect!\n", har_dastor);
+                printf("\nYour command is incorrect!\n");
             }
             for (i = 0; i < 100; i++)
             {
@@ -521,6 +511,5 @@ int main(int argc, char *argv[])
             overflow(s[x], s[y], s[z]);
         }
     }
-    printf("%d %d", s[1], s[0]);
- 
+    printf("\n%d %d", s[1], s[0]);
 }
