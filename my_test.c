@@ -198,13 +198,14 @@ void DIV(int x, int y)
 }
 
 /****************************************************************************************************************************************************************************************/
-int main(int argc, char *argv[])
+int main()
 {
     char filename[25];
     char har_dastor[100];
     char buffer[100];
     char jmp[200][200], t;
-    strcpy(filename, argv[1]);
+    // strcpy(filename, argv[1]);
+    scanf("%s", &filename);
     int x, y, z, i;
     int shomaresh_khat = 0, count = 0;
     FILE *fpointer = fopen(filename, "r");
