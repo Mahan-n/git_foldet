@@ -179,7 +179,7 @@ void MULL(int x, int y)
     int result = 0;
     char k[32];
     int u, v;
-    for (int v = 7; v >= 0 ; v--)
+    for (int v = 7; v >= 0; v--)
     {
         u = z % 2;
         z = z / 2;
@@ -187,7 +187,7 @@ void MULL(int x, int y)
     }
     for (v = 0; v < 4; v++)
     {
-    
+
         if (k[v] == 1)
         {
             result = result + pow(2, v);
@@ -205,14 +205,24 @@ void MULL(int x, int y)
     s[y] = result;
 }
 
+void DIV(int x, int y)
+{
+    int q, r;
+    q = s[x] / s[y];
+    r = s[x] % s[y];
+
+    s[x] = q;
+    s[y] = r;
+}
+
 /****************************************************************************************************************************************************************************************/
-int main(int argc,char* argv[])
+int main(int argc, char *argv[])
 {
     char filename[25];
     char har_dastor[100];
     char buffer[100];
     char jmp[200][200], t;
-    strcpy(filename,argv[1]);
+    strcpy(filename, argv[1]);
     int x, y, z, i;
     int shomaresh_khat = 0, count = 0;
     FILE *fpointer = fopen(filename, "r");
@@ -220,7 +230,7 @@ int main(int argc,char* argv[])
     while (fscanf(fpointer, "%[^\n]\n", buffer) != EOF)
 
     {
-       
+
         for (int i = 0; i < 100; i++)
         {
             buffer[i] = toupper(buffer[i]);
@@ -260,8 +270,11 @@ int main(int argc,char* argv[])
                 har_dastor[i] = buffer[i];
             }
 
+            // printf("%s", har_dastor);
+
             if (strcmp(har_dastor, "MOV") == 0)
             {
+
                 sscanf(buffer, "MOV S%d, %c", &x, &t);
                 if (t == 'S')
                 {
@@ -451,7 +464,7 @@ int main(int argc,char* argv[])
             {
                 output();
             }
-            /************************************************************************************************************************************/
+
             else if (strcmp(har_dastor, "JMP") == 0)
             {
                 sscanf(buffer, "JMP %d", &x);
@@ -459,12 +472,12 @@ int main(int argc,char* argv[])
                 fseek(fpointer, 0, SEEK_SET);
                 shomaresh_khat = 0;
             }
-            /************************************************************************************************************************************/
+
             else if (strcmp(har_dastor, "EXIT") == 0)
             {
                 break;
             }
-            else if (strcmp(har_dastor, "MULL "))
+            else if (strcmp(har_dastor, "MULL") == 0)
             {
                 sscanf(buffer, "MULL S%d, S%d", &x, &y);
                 if (x > 31 && y > 31)
@@ -475,6 +488,22 @@ int main(int argc,char* argv[])
                 {
 
                     MULL(x, y);
+                }
+            }
+            /************************************************************************************************************************************/
+
+            /************************************************************************************************************************************/
+            else if (strcmp(har_dastor, "DIV") == 0)
+            {
+                // printf("Hello world!");
+                sscanf(buffer, "DIV S%d, S%d", &x, &y);
+                if (x > 31 && y > 31)
+                {
+                    printf("ERROR!");
+                }
+                else
+                {
+                    DIV(x, y);
                 }
             }
             else
@@ -492,6 +521,6 @@ int main(int argc,char* argv[])
             overflow(s[x], s[y], s[z]);
         }
     }
-
     printf("%d %d", s[1], s[0]);
+ 
 }
