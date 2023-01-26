@@ -288,7 +288,7 @@ int main()
                 {
                     sscanf(buffer, "MOV S%d, S%d", &x, &y);
 
-                    if (x > 31 && y > 31)
+                    if (x > 31 || y > 31)
                     {
                         printf("ERROR!");
                     }
@@ -317,7 +317,7 @@ int main()
             {
                 sscanf(buffer, "ADD S%d, S%d, S%d", &x, &y, &z);
 
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("ERROR!");
                 }
@@ -332,7 +332,7 @@ int main()
             {
                 sscanf(buffer, "SUB S%d, S%d, S%d", &x, &y, &z);
 
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("EROR!");
                 }
@@ -346,7 +346,7 @@ int main()
             else if (strcmp(har_dastor, "AND") == 0)
             {
                 sscanf(buffer, "AND S%d, S%d, S%d", &x, &y, &z);
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("EROR!");
                 }
@@ -359,7 +359,7 @@ int main()
             else if (strcmp(har_dastor, "XOR") == 0)
             {
                 sscanf(buffer, "XOR S%d, S%d, S%d", &x, &y, &z);
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("EROR!");
                 }
@@ -373,7 +373,7 @@ int main()
             {
 
                 sscanf(buffer, "OR S%d, S%d, S%d", &x, &y, &z);
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("EROR!");
                 }
@@ -386,7 +386,7 @@ int main()
             {
 
                 sscanf(buffer, "ADDI S%d, S%d, %d", &x, &y, &z);
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("EROR!");
                 }
@@ -398,7 +398,7 @@ int main()
             else if (strcmp(har_dastor, "SUBI") == 0)
             {
                 sscanf(buffer, "SUBI S%d, S%d, %d", &x, &y, &z);
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("EROR!");
                 }
@@ -410,7 +410,7 @@ int main()
             else if (strcmp(har_dastor, "ANDI") == 0)
             {
                 sscanf(buffer, "ANDI S%d, S%d, %d", &x, &y, &z);
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("EROR!");
                 }
@@ -422,7 +422,7 @@ int main()
             else if (strcmp(har_dastor, "XORI") == 0)
             {
                 sscanf(buffer, "XORI S%d, S%d, %d", &x, &y, &z);
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("EROR!");
                 }
@@ -435,7 +435,7 @@ int main()
             else if (strcmp(har_dastor, "ORI") == 0)
             {
                 sscanf(buffer, "ORI S%d, S%d, %d", &x, &y, &z);
-                if (x > 31 && y > 31 && z > 31)
+                if (x > 31 || y > 31 || z > 31)
                 {
                     printf("EROR!");
                 }
@@ -447,7 +447,7 @@ int main()
             else if (strcmp(har_dastor, "SWP") == 0)
             {
                 sscanf(buffer, "SWP S%d, S%d", &x, &y);
-                if (x > 31 && y > 31)
+                if (x > 31 || y > 31)
                 {
                     printf("EROR!");
                 }
@@ -488,7 +488,7 @@ int main()
             else if (strcmp(har_dastor, "MULL") == 0)
             {
                 sscanf(buffer, "MULL S%d, S%d", &x, &y);
-                if (x > 31 && y > 31)
+                if (x > 31 || y > 31)
                 {
                     printf("ERROR!");
                 }
@@ -502,7 +502,7 @@ int main()
             else if (strcmp(har_dastor, "DIV") == 0)
             {
                 sscanf(buffer, "DIV S%d, S%d", &x, &y);
-                if (x > 31 && y > 31)
+                if (x > 31 || y > 31)
                 {
                     printf("ERROR!");
                 }
@@ -525,12 +525,26 @@ int main()
             else if (strcmp(har_dastor, "PUSH") == 0)
             {
                 sscanf(buffer, "PUSH S%d", &x);
-                push(x);
+                if (x > 31 || y > 31)
+                {
+                    printf("ERROR!");
+                }
+                else
+                {
+                    push(x);
+                }
             }
             else if (strcmp(har_dastor, "POP") == 0)
             {
                 sscanf(buffer, "POP S%d", &x);
-                pop(x);
+                if (x > 31 || y > 31)
+                {
+                    printf("ERROR!");
+                }
+                else
+                {
+                    pop(x);
+                }
             }
 
             else
