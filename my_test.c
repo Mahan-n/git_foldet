@@ -5,6 +5,7 @@
 
 int s[32];
 int s_v[8];
+int str[32], top = -1;
 
 void bitwiseadd(int x, int y, int z)
 {
@@ -195,6 +196,30 @@ void DIV(int x, int y)
 
     s[x] = q;
     s[y] = r;
+}
+void push(int x)
+{
+    if (top == 31)
+    {
+        printf("\nover flow condition: cant add more elements into the stack!");
+    }
+    else
+    {
+        top += 1;
+        str[top] = s[x];
+    }
+}
+void pop(int x)
+{
+    if (top == -1)
+    {
+        printf("\nunder flow condition: stack is emty cant  delete any element");
+    }
+    else
+    {
+        s[x] = str[top];
+        top -= 1;
+    }
 }
 
 /****************************************************************************************************************************************************************************************/
@@ -497,6 +522,17 @@ int main()
                     continue;
                 }
             }
+            else if (strcmp(har_dastor, "PUSH") == 0)
+            {
+                sscanf(buffer, "PUSH S%d", &x);
+                push(x);
+            }
+            else if (strcmp(har_dastor, "POP") == 0)
+            {
+                sscanf(buffer, "POP S%d", &x);
+                pop(x);
+            }
+
             else
             {
                 printf("\nYour command is incorrect!\n");
