@@ -1,0 +1,14 @@
+mov s0, 2        
+mov s1, 5          
+add s2, s1, s0     
+sub s3, s1, s0     
+input
+output
+dump_regs
+dump_regs_f
+mull s1, s0       
+div s2, s3        
+skie s1, s0
+push s1
+pop s0
+exit
