@@ -1,0 +1,14 @@
+mov s0, 2          // s0 = 2
+mov s1, 5          // s1 = 5
+add s2, s1, s0     // s2 = 7
+sub s3, s2,s1      // s3 = 2
+and s4, s3, s1     // s4 = 0
+andi s5, s3, 9     // s5 = 0
+or s6, s3, s1      // s6 = 7
+ori s7, s6, 2      // s7 = 7
+addi s8, s7, 3     // s8 = 10
+subi s9, s8, 3     // s9 = 7
+xor s10, s9, s8    // s10 = 13
+xori s11, s10, 4   // s11 = 9
+swp s11, s10       // s11=13 s10=9 
+exit
