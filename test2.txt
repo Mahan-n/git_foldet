@@ -4,8 +4,7 @@ input
 output
 add s2, s1, s0     
 sub s3, s1, s0     
-mull s0, s1        
-div s2, s3         
+mull s0, s1                
 skie s3, s0
 dump_regs
 exit
