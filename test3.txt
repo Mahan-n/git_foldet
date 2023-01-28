@@ -1,0 +1,7 @@
+mov s0, 5
+mov s1, 6
+jmp 5
+add s2, s1, s0
+sub s3, s1, s0
+dump_regs_f
+exit
